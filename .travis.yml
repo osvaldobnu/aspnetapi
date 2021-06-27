@@ -10,11 +10,11 @@ before_install:
 script:
   - docker-compose build
 before_deploy:
-  chmod u+x .travis/deploy.sh
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 deploy:
   provider: script
   script:
+    chmod u+x .travis/deploy.sh
     docker tag rest-api:latest $DOCKER_USERNAME/rest-api:$TRAVIS_JOB_ID;
     docker tag rest-api-db:latest $DOCKER_USERNAME/rest-api-db:$TRAVIS_JOB_ID;
     docker push $DOCKER_USERNAME/rest-api:$TRAVIS_JOB_ID;;
