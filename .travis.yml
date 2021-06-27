@@ -14,11 +14,10 @@ before_deploy:
 deploy:
   provider: script
   script:
-    chmod u+x .travis/deploy.sh
     docker tag rest-api:latest $DOCKER_USERNAME/rest-api:$TRAVIS_JOB_ID;
     docker tag rest-api-db:latest $DOCKER_USERNAME/rest-api-db:$TRAVIS_JOB_ID;
-    docker push $DOCKER_USERNAME/rest-api:$TRAVIS_JOB_ID;;
-    docker push $DOCKER_USERNAME/rest-api-db:$TRAVIS_JOB_ID;;
+    docker push $DOCKER_USERNAME/rest-api:$TRAVIS_JOB_ID;
+    docker push $DOCKER_USERNAME/rest-api-db:$TRAVIS_JOB_ID;
   on:
     branch: master
 notifications:
